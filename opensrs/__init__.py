@@ -25,7 +25,7 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from xml.etree.ElementTree import fromstring, tostring, SubElement, Element
-from urllib import quote, urlencode
+from urllib.parse import quote, urlencode
 
 import httplib2
 import hashlib
@@ -190,7 +190,7 @@ class OpenSRS(object):
             requires, uses data_to_xml to recurse
             """
             _dt_assoc = SubElement(elm, 'dt_assoc')
-            for key in data.keys():
+            for key in list(data.keys()):
                 data_to_xml(_dt_assoc, key, data[key])
 
         def data_to_dt_array(elm, list):
