@@ -158,7 +158,10 @@ class OpenSRS(object):
                         elif child[0].tag == 'dt_array':
                             new_data = xml_to_data(child[0], is_list=True)
                     else:
-                        new_data = str(child.text)
+                        try:
+                            new_data = str(child.text)
+                        except UnicodeEncodeError as e:
+                            new_data = child.text.encode('iso8859-1')
 
                     key = child.get('key')
                     if is_list:
